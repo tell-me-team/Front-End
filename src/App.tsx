@@ -1,10 +1,25 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
+import ErrPage from "./pages/ErrPage";
+import SurveyPage from "./pages/SurveyPage";
+import TestMain from "./pages/testMain";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      errorElement: <ErrPage />,
+      children: [
+        { path: "/", element: <TestMain /> },
+        { path: "/survey", element: <SurveyPage /> },
+      ],
+    },
+  ]);
+
   return (
-    <div>
-      <p>기본설정</p>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
