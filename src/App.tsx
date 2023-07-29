@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import ErrPage from "./pages/ErrPage";
-import SurveyPage from "./pages/SurveyPage";
+import SurveyPage from "./components/surveyPage/SurveyPage";
 import TestMain from "./pages/testMain";
 
 function App() {

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { surveyAllProgress } from "../constants/surveyPageUtils";
+import { styled } from "styled-components";
+import { surveyAllProgress } from "../../constants/surveyPageUtils";
+
+interface ProgressGageBarStatusProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  status: number;
+}
 
 const SurveyPage = () => {
   const [surveyProgress, setSurveyProgress] = useState(surveyAllProgress[0]);
@@ -29,7 +35,8 @@ const SurveyPage = () => {
   return (
     <div>
       <div>{surveyProgress}/10</div>
-      <div></div>
+      <SProgressGageBar />
+      <SProgressGageBarStatus status={surveyProgress} />
       <div>
         {backIcon && <div onClick={onBackClick}> 뒤로가기 </div>}
         <div>icon image</div>
@@ -56,3 +63,21 @@ const SurveyPage = () => {
 };
 
 export default SurveyPage;
+
+const SProgressGageBar = styled.div`
+  width: 327px;
+  height: 10px;
+  background-color: #6f63e0;
+  opacity: 0.2;
+  border-radius: 100px;
+`;
+
+const SProgressGageBarStatus = styled.div<ProgressGageBarStatusProps>`
+  position: relative;
+  margin-top: -10px;
+  width: ${(props) => props.status * 32.7}px;
+  height: 10px;
+  background-color: #6f63e0;
+  border-radius: 100px;
+  z-index: 1;
+`;
