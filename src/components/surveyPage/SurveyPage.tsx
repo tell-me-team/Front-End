@@ -1,26 +1,47 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
-import { surveyAllProgress } from "../../constants/surveyPageUtils";
+import React, { useEffect, useState } from "react";
+import { surveyGetApi } from "../../api/surveyApi";
 
-interface ProgressGageBarStatusProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  status: number;
-}
+import { surveyAllProgress } from "../../constants/surveyPageUtils";
+import {
+  SExtraButton,
+  SGagebarContainer,
+  SIconImage,
+  SLoadProfileButton,
+  SProgressGageBar,
+  SProgressGageBarStatus,
+  SSurveyContainer,
+} from "./SurveyPageStyle";
+import SurveySection from "./SurveySection";
 
 const SurveyPage = () => {
   const [surveyProgress, setSurveyProgress] = useState(surveyAllProgress[0]);
   const [answer, setAnswer] = useState<string[]>([]);
   const [backIcon, setBackIcon] = useState(false);
-
+  const [survey, setSurvey] = useState([]);
   const onAnswerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     setAnswer((prev) => prev.concat(target.value));
     const index = surveyAllProgress.indexOf(surveyProgress) + 1;
-    if (index > 0) {
+    if (index > 0 && index <= 10) {
       setBackIcon(true);
     }
     setSurveyProgress(surveyAllProgress[index]);
+    if (index === 10) {
+      setSurveyProgress(10);
+    }
+    console.log(surveyProgress);
   };
+
+  const fetchData = async () => {
+    const response = await surveyGetApi();
+    const newRes = response.slice(0, 10);
+    setSurvey(newRes);
+    console.log(newRes);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const onBackClick = () => {
     const index = surveyAllProgress.indexOf(surveyProgress) - 1;
@@ -33,24 +54,24 @@ const SurveyPage = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#F7F0FF", width: "375px", height: "787px" }}
+    >
       <div>
-        <div
-          style={{
-            marginTop: "8px",
-            marginBottom: "8px",
-            marginLeft: "90%",
-            color: "#A299F3",
-          }}
-        >
-          {surveyProgress}/10
-        </div>
+        <SGagebarContainer>{surveyProgress}/10</SGagebarContainer>
+
         <SProgressGageBar />
         <SProgressGageBarStatus status={surveyProgress} />
       </div>
-      <div style={{ margin: "30px 20px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          {backIcon && (
+      <SSurveyContainer>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "-50px",
+          }}
+        >
+          {backIcon ? (
             <div onClick={onBackClick}>
               <SExtraButton />
               <div
@@ -71,23 +92,17 @@ const SurveyPage = () => {
                   <path
                     d="M15 1L1.53533 8.62998C0.859348 9.01304 0.85935 9.98696 1.53533 10.37L15 18"
                     stroke="#6F63E0"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   />
                 </svg>
               </div>
             </div>
+          ) : (
+            <SExtraButton style={{ backgroundColor: "#F9F9FD" }} />
           )}
 
-          <div
-            style={{
-              width: "52px",
-              height: "52px",
-              borderRadius: "100px",
-              backgroundColor: "skyblue",
-              margin: "0 auto",
-            }}
-          ></div>
+          <SIconImage />
           <div>
             <SExtraButton
               style={{ backgroundColor: "#9188EC", opacity: "0.08" }}
@@ -95,73 +110,19 @@ const SurveyPage = () => {
           </div>
         </div>
 
-        <div>
-          <p>질문 {surveyProgress}</p>
-          <p>질문 영역</p>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              width: "272px",
-              height: "258px",
-              borderRadius: "20px",
-              backgroundColor: "skyblue",
-            }}
-          >
-            img
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "20px",
-          }}
-        >
-          <SSelectAnswerButton onClick={onAnswerClick} value="선택1">
-            선택1
-          </SSelectAnswerButton>
-          <div>|</div>
-          <SSelectAnswerButton onClick={onAnswerClick} value="선택2">
-            선택2
-          </SSelectAnswerButton>
-        </div>
-      </div>
+        <SurveySection
+          survey={survey}
+          surveyProgress={surveyProgress}
+          onAnswerClick={onAnswerClick}
+        />
+      </SSurveyContainer>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div>위티프로필 바로가기</div>
+        <SLoadProfileButton style={{ marginTop: "-70px" }}>
+          위티프로필 바로가기
+        </SLoadProfileButton>
       </div>
     </div>
   );
 };
 
 export default SurveyPage;
-
-const SProgressGageBar = styled.div`
-  width: 327px;
-  height: 10px;
-  background-color: #6f63e0;
-  opacity: 0.2;
-  border-radius: 100px;
-`;
-
-const SProgressGageBarStatus = styled.div<ProgressGageBarStatusProps>`
-  position: relative;
-  margin-top: -10px;
-  width: ${(props) => props.status * 32.7}px;
-  height: 10px;
-  background-color: #6f63e0;
-  border-radius: 100px;
-  z-index: 1;
-`;
-
-const SExtraButton = styled.div`
-  width: 44px;
-  height: 44px;
-  border-radius: 100px;
-  background-color: #6f63e0;
-  opacity: 0.2;
-`;
-
-const SSelectAnswerButton = styled.button`
-  margin: 0 10px;
-`;
