@@ -1,9 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrPage from "./pages/ErrPage";
 import SurveyPage from "./components/surveyPage/SurveyPage";
-import TestMain from "./pages/testMain";
 import { Reset } from "styled-reset";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
