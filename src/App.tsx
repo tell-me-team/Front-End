@@ -1,4 +1,7 @@
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrPage from "./pages/ErrPage";
+import SurveyPage from "./components/surveyPage/SurveyPage";
+import TestMain from "./pages/testMain";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -7,15 +10,23 @@ import MainPage from "./pages/MainPage";
 import KakaoLoginPage from "./pages/KakaoLoginPage";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element:  <Layout />,
+      errorElement: <ErrPage />,
+      children: [
+        { path: "/", element: <MainPage /> },
+        { path: "/survey", element: <SurveyPage /> },
+        { path: "/auth/kakao", element: <KakaoLoginPage />},
+      ],
+    },
+  ]);
+  
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
-          <Route path="/auth/kakao" element={<KakaoLoginPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
