@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 
-import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
 import ServiceIcon from "../components/common/ServiceIcon";
 
 function MainPage() {
@@ -12,7 +11,7 @@ function MainPage() {
         <SSubTitleSpan>나에 대해 알려줘!</SSubTitleSpan>
         <STestImage />
         <hr />
-        <KakaoLoginButton />
+        <SButton>테스트 시작하기</SButton>
       </SGlassBox>
       <SPBox>
         <SCounterP>
@@ -87,6 +86,17 @@ const STestImage = styled.div`
   background-color: white;
   border-radius: 23px;
   margin-top: 24px;
+`;
+
+const SButton = styled.button`
+  width: 100%;
+  height: 52px;
+  border-radius: 16px;
+  background-color: #6f63e0;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 8px;
 `;
 
 const HighlightText = styled.span`
