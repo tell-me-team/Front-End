@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrPage from "./pages/ErrPage";
 import SurveyPage from "./components/surveyPage/SurveyPage";
-import { Reset } from "styled-reset";
+import GlobalStyle from "./global";
 
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <Reset />
+      <GlobalStyle />
       <RouterProvider router={router} />
     </>
   );
