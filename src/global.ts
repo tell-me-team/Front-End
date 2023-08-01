@@ -43,10 +43,6 @@ ${reset}
       url("./styles/fonts/NotoSansKR-Bold.otf") format("truetype");
     font-display: fallback;
   }
-
-  * {
-    font-family: "Noto Sans KR", sans-serif;
-  }
 `;
 
 export default GlobalStyle;
