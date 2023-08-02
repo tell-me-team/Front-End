@@ -6,6 +6,8 @@ import { Reset } from "styled-reset";
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
 import KakaoLoginPage from "./pages/KakaoLoginPage";
+import PuzzlePage from "./components/puzzlePage/PuzzlePage";
+import ResultPage from "./components/resultPage/ResultPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,6 +19,8 @@ function App() {
         { path: "/", element: <MainPage /> },
         { path: "/survey", element: <SurveyPage /> },
         { path: "/auth/kakao", element: <KakaoLoginPage /> },
+        { path: "/puzzle", element: <PuzzlePage /> },
+        { path: "/result", element: <ResultPage /> },
       ],
     },
   ]);
