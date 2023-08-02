@@ -12,6 +12,9 @@ const Layout = () => {
 export default Layout;
 
 const SLayOut = styled.main`
+  display: flex;
+  align-items: center;
   max-width: 375px;
   margin: 0 auto;
+  min-height: 100vh;
 `;
