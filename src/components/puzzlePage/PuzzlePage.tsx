@@ -24,38 +24,37 @@ interface Question {
 const PuzzlePage = () => {
   const [types, setTypes] = useState<Question[]>([]);
   const [mouseDownClientX, setMouseDownClientX] = useState(0);
-  const [mouseUpClientX, setMouseUpClientX] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [mouseUpClientX, setMouseUpClientX] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
 
-  const onMouseDown = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setMouseDownClientX(e.clientX);
-  };
+  // const onMouseDown = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  //   setMouseDownClientX(e.clientX);
+  // };
 
-  const onMouseUp = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setMouseUpClientX(e.clientX);
-    const dragSpaceX = Math.abs(mouseDownClientX - e.clientX);
-    if (mouseDownClientX !== 0 && dragSpaceX > 100) {
-      if (e.clientX < mouseDownClientX) {
-        handleNextBtn();
-      } else if (e.clientX > mouseDownClientX) {
-        handlePrevBtn();
-      }
-    }
-  };
+  // const onMouseUp = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  //   setMouseUpClientX(e.clientX);
+  //   const dragSpaceX = Math.abs(mouseDownClientX - e.clientX);
+  //   if (mouseDownClientX !== 0 && dragSpaceX > 100) {
+  //     if (e.clientX < mouseDownClientX) {
+  //       handleNextBtn();
+  //     } else if (e.clientX > mouseDownClientX) {
+  //       handlePrevBtn();
+  //     }
+  //   }
+  // };
 
-  const handleNextBtn = () => {
-    setActiveIndex((prevIndex) => Math.min(prevIndex + 1, types.length - 1));
-  };
+  // const handleNextBtn = () => {
+  //   setActiveIndex((prevIndex) => Math.min(prevIndex + 1, types.length - 1));
+  // };
 
-  const handlePrevBtn = () => {
-    setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
+  // const handlePrevBtn = () => {
+  //   setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  // };
 
   const fetchData = async () => {
     const response = await surveyGetApi();
     const newRes = response.slice(0, 6);
     setTypes(newRes);
-    //console.log(newRes);
   };
 
   useEffect(() => {

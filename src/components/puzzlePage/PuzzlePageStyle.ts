@@ -42,14 +42,16 @@ export const SType = styled.div`
 `;
 
 export const SPuzzlesContainer = styled.div`
+  display: absolute;
   width: 375px;
   margin: 0 auto;
-  margin-top: -10px;
+  margin-top: -1130px;
 `;
 
 export const SPuzzleContainer = styled.div`
+  display: absolute;
   width: 327px;
-  height: 181px;
+  height: 200px;
   margin-top: 4px;
   display: flex;
 
