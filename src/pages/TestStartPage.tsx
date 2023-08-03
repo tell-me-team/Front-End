@@ -2,11 +2,12 @@ import { styled } from "styled-components";
 
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
 import ServiceIcon from "../components/common/ServiceIcon";
+import ProfileImage from "../components/common/ProfileImage";
 
 const TestStartPage = () => {
   return (
     <SLayout>
-      <SProfileImage />
+      <ProfileImage />
       <SGlassBox>
         <ServiceIcon />
         <STitleSpan>Tell ME</STitleSpan>
@@ -34,15 +35,6 @@ const SLayout = styled.div`
   background-size: cover;
 `;
 
-const SProfileImage = styled.div`
-  width: 44px;
-  height: 44px;
-  background-color: #6f63e0;
-  opacity: 0.2;
-  border-radius: 50%;
-  margin-bottom: 40px;
-`;
-
 const SGlassBox = styled.div`
   height: 480px;
   display: flex;
@@ -53,6 +45,7 @@ const SGlassBox = styled.div`
   backdrop-filter: blur(50px);
   border-radius: 32px;
   padding: 0 24px;
+  margin-top: 40px;
 
   > hr {
     width: 100%;
