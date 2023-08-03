@@ -68,7 +68,7 @@ const SurveyPage = () => {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginTop: "-50px",
+            marginTop: "-20px",
           }}
         >
           {backIcon ? (
@@ -117,7 +117,7 @@ const SurveyPage = () => {
         />
       </SSurveyContainer>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <SLoadProfileButton style={{ marginTop: "-70px" }}>
+        <SLoadProfileButton style={{ marginTop: "-30px" }}>
           위티프로필 바로가기
         </SLoadProfileButton>
       </div>

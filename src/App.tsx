@@ -6,6 +6,8 @@ import GlobalStyle from "./global";
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
 import KakaoLoginPage from "./pages/KakaoLoginPage";
+import ResultPage from "./components/resultPage/ResultPage";
+import PuzzlesPage from "./components/puzzlePage/PuzzlesPage";
 import TestStartPage from "./pages/TestStartPage";
 import ProfilePage from "./pages/ProfilePage";
 
@@ -19,6 +21,8 @@ function App() {
         { path: "/", element: <MainPage /> },
         { path: "/survey", element: <SurveyPage /> },
         { path: "/auth/kakao", element: <KakaoLoginPage /> },
+        { path: "/puzzle", element: <PuzzlesPage /> },
+        { path: "/result", element: <ResultPage /> },
         { path: "/testStart", element: <TestStartPage /> },
         { path: "/profile", element: <ProfilePage /> },
       ],
