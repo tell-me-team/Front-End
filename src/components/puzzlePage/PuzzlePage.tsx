@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
 import { surveyGetApi } from "../../api/surveyApi";
 import { puzzles } from "../../constants/surveyPageUtils";
+import {
+  SProfile,
+  SPuzzle1,
+  SPuzzle2,
+  SPuzzleContainer,
+  SPuzzlesContainer,
+  SType,
+  STypeContainer,
+  STypesContainer,
+  STypesOutContainer,
+} from "./PuzzlePageStyle";
 
 interface Question {
   id: string;
@@ -12,7 +22,6 @@ interface Question {
 
 const PuzzlePage = () => {
   const [types, setTypes] = useState<Question[]>([]);
-  // 모바일 화면일때 touchX 값 관리
   const [mouseDownClientX, setMouseDownClientX] = useState(0);
   const [mouseUpClientX, setMouseUpClientX] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -60,7 +69,9 @@ const PuzzlePage = () => {
     >
       <STypeContainer>
         <SProfile></SProfile>
-        <div style={{ height: "100px", margin: "auto" }}>유형 검사</div>
+        <div>
+          <p>유형 검사</p>
+        </div>
       </STypeContainer>
       <STypesOutContainer>
         <STypesContainer
@@ -78,25 +89,43 @@ const PuzzlePage = () => {
       </STypesOutContainer>
       <SPuzzlesContainer>
         {types.map((type, index) => (
-          <SPuzzleContainer>
+          <SPuzzleContainer key={type.id}>
             {index % 2 === 0 ? (
               <>
                 <div>
-                  <div>{type.id}</div>
-                  <SPuzzle1
-                    dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                  />
+                  <div className="types">{type.id}</div>
+                  {index === 4 ? (
+                    <SPuzzle1
+                      style={{ marginTop: "60px" }}
+                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
+                    />
+                  ) : (
+                    <SPuzzle1
+                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
+                    />
+                  )}
                 </div>
-                <div>{type.title}</div>
+                <div className="detail" style={{ marginLeft: "200px" }}>
+                  {type.title}
+                </div>
               </>
             ) : (
               <>
-                <div>{type.title}</div>
+                <div className="detail" style={{ marginLeft: "20px" }}>
+                  {type.title}
+                </div>
                 <div>
-                  <div>{type.id}</div>
-                  <SPuzzle2
-                    dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                  />
+                  <div className="types">{type.id}</div>
+                  {index === 3 ? (
+                    <SPuzzle2
+                      style={{ marginTop: "60px" }}
+                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
+                    />
+                  ) : (
+                    <SPuzzle2
+                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
+                    />
+                  )}
                 </div>
               </>
             )}
@@ -108,64 +137,3 @@ const PuzzlePage = () => {
 };
 
 export default PuzzlePage;
-
-const SProfile = styled.div`
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-  background-color: red;
-`;
-
-const STypeContainer = styled.div`
-  width: 327px;
-  height: 100px;
-  display: flex;
-  text-align: center;
-`;
-
-const STypesContainer = styled.div`
-  height: 92px;
-  width: 2100px;
-  display: flex;
-`;
-
-const STypesOutContainer = styled.div`
-  width: 327px;
-  margin: 36px 24px;
-  overflow: hidden;
-`;
-
-const SType = styled.div`
-  width: 265px;
-  height: 92px;
-  border-radius: 200px;
-  background-color: #b0acd2;
-  opacity: 0.25;
-  margin-right: 24px;
-  transition: transform 0.3s ease;
-`;
-
-const SPuzzlesContainer = styled.div`
-  width: 327px;
-`;
-
-const SPuzzleContainer = styled.div`
-  width: 327px;
-  height: 181px;
-  margin-top: 24px;
-  display: flex;
-`;
-
-const SPuzzle1 = styled.div`
-  height: 181px;
-  margin-top: 0 auto;
-  margin-left: 25px;
-  z-index: 1;
-`;
-
-const SPuzzle2 = styled.div`
-  height: 181px;
-  margin-top: 0 auto;
-  margin-left: 154px;
-  z-index: 1;
-`;
