@@ -6,7 +6,6 @@ import { Reset } from "styled-reset";
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
 import KakaoLoginPage from "./pages/KakaoLoginPage";
-import PuzzlePage from "./components/puzzlePage/PuzzlePage";
 import ResultPage from "./components/resultPage/ResultPage";
 import PuzzlesPage from "./components/puzzlePage/PuzzlesPage";
 
