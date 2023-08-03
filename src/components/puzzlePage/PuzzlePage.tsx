@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { surveyGetApi } from "../../api/surveyApi";
+import glass from "../../assets/glass.svg";
 import { puzzles } from "../../constants/surveyPageUtils";
 import {
   SProfile,
@@ -65,15 +66,21 @@ const PuzzlePage = () => {
       style={{
         backgroundColor: "#F7F0FF",
         width: "375px",
+        height: "1400px",
       }}
     >
       <STypeContainer>
         <SProfile></SProfile>
-        <div>
-          <p>유형 검사</p>
+        <div style={{ marginTop: "16px" }}>
+          <p style={{ width: "207px", fontSize: "22px" }}>
+            <strong style={{ color: "#6F63E0", fontSize: "22px" }}>
+              헤르미온느 유형
+            </strong>
+            을 가진, 사용자님을 소개합니다.
+          </p>
         </div>
       </STypeContainer>
-      <STypesOutContainer>
+      {/* <STypesOutContainer>
         <STypesContainer
           style={{
             transform: `translateX(-${
@@ -84,9 +91,24 @@ const PuzzlePage = () => {
           onMouseUp={onMouseUp}
         >
           {types[0] &&
-            types.map((type) => <SType key={type.id}>{type.id}</SType>)}
+            types.map((type) => (
+              <>
+                <img src={glass} key={type.id} />
+                <div
+                  style={{
+                    position: "relative",
+                    marginLeft: "10px",
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "100px",
+                    backgroundColor: "green",
+                  }}
+                ></div>
+                <p>{type.id}</p>
+              </>
+            ))}
         </STypesContainer>
-      </STypesOutContainer>
+      </STypesOutContainer> */}
       <SPuzzlesContainer>
         {types.map((type, index) => (
           <SPuzzleContainer key={type.id}>

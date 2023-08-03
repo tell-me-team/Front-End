@@ -11,8 +11,6 @@ export const STypeContainer = styled.div`
   width: 327px;
   height: 100px;
   display: flex;
-
-  background-color: yellow;
   margin: 40px auto;
 
   p {
@@ -40,6 +38,7 @@ export const SType = styled.div`
   opacity: 0.25;
   margin-right: 24px;
   transition: transform 0.3s ease;
+  box-shadow: -3px 2px 0 rgba(0, 0, 0, 0.3);
 `;
 
 export const SPuzzlesContainer = styled.div`
@@ -51,7 +50,7 @@ export const SPuzzlesContainer = styled.div`
 export const SPuzzleContainer = styled.div`
   width: 327px;
   height: 181px;
-  margin-top: 14px;
+  margin-top: 4px;
   display: flex;
 
   .types {
@@ -69,15 +68,15 @@ export const SPuzzleContainer = styled.div`
 
 export const SPuzzle1 = styled.div`
   position: absolute;
-  height: 181px;
-  margin: 20px auto;
+  height: 180px;
+  margin: 10px auto;
   margin-left: 25px;
   z-index: 1;
 `;
 
 export const SPuzzle2 = styled.div`
   position: absolute;
-  height: 181px;
+  height: 180px;
   margin-top: 0 auto;
   right: 0;
   margin-right: 85px;
