@@ -17,4 +17,7 @@ const SLayOut = styled.main`
   max-width: 375px;
   margin: 0 auto;
   min-height: 100vh;
+  * {
+    font-family: "Noto Sans KR", sans-serif;
+  }
 `;

@@ -1,3 +1,5 @@
+import { styled } from "styled-components";
+
 const KakaoLogin = () => {
   const onKakaoLoginClick = () => {
     const CLIENT_ID = `${import.meta.env.VITE_KAKAO_API_KEY}`;
@@ -6,7 +8,19 @@ const KakaoLogin = () => {
     window.location.href = kakaoURL;
   };
 
-  return <button onClick={onKakaoLoginClick}>카카오 로그인</button>;
+  return <SButton onClick={onKakaoLoginClick}>테스트 만들기</SButton>;
 };
+
+const SButton = styled.button`
+  width: 100%;
+  height: 66px;
+  border-radius: 16px;
+  background-color: #6f63e0;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 12px;
+`;
 
 export default KakaoLogin;
