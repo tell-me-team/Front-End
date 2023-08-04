@@ -12,12 +12,14 @@ interface Props {
   survey: Question[];
   surveyProgress: number;
   onAnswerClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  image: string;
 }
 
 const SurveySection: React.FC<Props> = ({
   survey,
   surveyProgress,
   onAnswerClick,
+  image,
 }: Props) => {
   return (
     survey[0] && (
@@ -39,7 +41,7 @@ const SurveySection: React.FC<Props> = ({
                 marginBottom: "30px",
               }}
             >
-              img
+              <img src={image} alt="question" />
             </div>
           </div>
           <div

@@ -12,22 +12,35 @@ import {
   SSurveyContainer,
 } from "./SurveyPageStyle";
 import SurveySection from "./SurveySection";
+import qImage1 from "../../assets/질문01.svg";
+import qImage2 from "../../assets/질문02.svg";
+import qImage3 from "../../assets/질문03.svg";
+import qImage4 from "../../assets/질문04.svg";
+import qImage5 from "../../assets/질문05.svg";
+import qImage6 from "../../assets/질문06.svg";
+import qImage7 from "../../assets/질문07.svg";
+import qImage8 from "../../assets/질문08.svg";
+import qImage9 from "../../assets/질문09.svg";
+import qImage10 from "../../assets/질문010.svg";
 
 const SurveyPage = () => {
   const [surveyProgress, setSurveyProgress] = useState(surveyAllProgress[0]);
   const [answer, setAnswer] = useState<string[]>([]);
   const [backIcon, setBackIcon] = useState(false);
   const [survey, setSurvey] = useState([]);
+  const [questImage, setQuestionImage] = useState(qImage1);
   const onAnswerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     setAnswer((prev) => prev.concat(target.value));
     const index = surveyAllProgress.indexOf(surveyProgress) + 1;
     if (index > 0 && index <= 10) {
       setBackIcon(true);
+      setQuestionImage(imagesArr[index]);
     }
     setSurveyProgress(surveyAllProgress[index]);
     if (index === 10) {
       setSurveyProgress(10);
+      setQuestionImage(imagesArr[9]);
     }
     console.log(surveyProgress);
   };
@@ -47,11 +60,26 @@ const SurveyPage = () => {
     const index = surveyAllProgress.indexOf(surveyProgress) - 1;
     if (index === 0) {
       setBackIcon(false);
+      setQuestionImage(imagesArr[0]);
     }
     setSurveyProgress(surveyAllProgress[index]);
     setAnswer((prev) => prev.slice(0, index));
+    setQuestionImage(imagesArr[index]);
     console.log(answer);
   };
+
+  const imagesArr = [
+    qImage1,
+    qImage2,
+    qImage3,
+    qImage4,
+    qImage5,
+    qImage6,
+    qImage7,
+    qImage8,
+    qImage9,
+    qImage10,
+  ];
 
   return (
     <div
@@ -114,6 +142,7 @@ const SurveyPage = () => {
           survey={survey}
           surveyProgress={surveyProgress}
           onAnswerClick={onAnswerClick}
+          image={questImage}
         />
       </SSurveyContainer>
       <div style={{ display: "flex", justifyContent: "center" }}>
