@@ -34,8 +34,11 @@ function MainPage() {
 }
 
 const SLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 48px);
   padding: 24px 40px;
   background-image: url(/background/background_image_1.svg);
   background-repeat: no-repeat;
@@ -83,9 +86,11 @@ const SSubTitleSpan = styled.span`
 const STestImage = styled.div`
   width: 100%;
   min-height: 130px;
-  background-color: white;
   border-radius: 23px;
   margin-top: 24px;
+  background-image: url(/banner/test_banner.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const SButton = styled.button`
@@ -115,7 +120,7 @@ const SFrameBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 92px;
+  height: 80px;
   background-color: rgba(111, 99, 224, 0.5);
   border-radius: 200px;
   margin-bottom: 24px;

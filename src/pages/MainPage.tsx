@@ -27,8 +27,11 @@ const TestStartPage = () => {
 };
 
 const SLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   padding: 40px 24px;
   background-image: url(/background/background_image_2.svg);
   background-repeat: no-repeat;
@@ -78,9 +81,11 @@ const SSubTitleSpan = styled.span`
 const STestImage = styled.div`
   width: 100%;
   min-height: 160px;
-  background-color: white;
   border-radius: 23px;
   margin-top: 24px;
+  background-image: url(/banner/main_banner.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export default TestStartPage;

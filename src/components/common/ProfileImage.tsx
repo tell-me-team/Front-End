@@ -10,6 +10,7 @@ const SProfileImage = styled.div`
   background-color: #6f63e0;
   opacity: 0.2;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 export default ProfileImage;

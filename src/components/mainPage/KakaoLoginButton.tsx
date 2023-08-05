@@ -21,6 +21,7 @@ const SButton = styled.button`
   font-size: 18px;
   font-weight: 300;
   margin-top: 12px;
+  cursor: pointer;
 `;
 
 export default KakaoLogin;
