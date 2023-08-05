@@ -23,7 +23,7 @@ function App() {
         { path: "/auth/kakao", element: <KakaoLoginPage /> },
         { path: "/puzzle", element: <PuzzlesPage /> },
         { path: "/result", element: <ResultPage /> },
-        { path: "/:id", element: <TestStartPage /> },
+        { path: "/:shortUrl", element: <TestStartPage /> },
         { path: "/profile", element: <ProfilePage /> },
       ],
     },

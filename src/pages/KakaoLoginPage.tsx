@@ -8,6 +8,7 @@ function KakaoLoginPage() {
 
   useEffect(() => {
     const code = new URL(document.location.toString()).searchParams.get("code");
+    console.log(code);
     if (typeof code === "string") {
       socialLogin(code)
         .then(({ accessToken, refreshToken }) => {
@@ -17,7 +18,6 @@ function KakaoLoginPage() {
         })
         .catch((error) => {
           console.error(error);
-          navigate("/error");
         });
     }
   }, [navigate]);

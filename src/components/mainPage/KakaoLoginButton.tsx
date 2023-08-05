@@ -1,6 +1,11 @@
 import { styled } from "styled-components";
+import { accessTokenStorage } from "../../store/typedStorage";
+import { useNavigate } from "react-router-dom";
 
 const KakaoLogin = () => {
+  const loginStatus = accessTokenStorage.get();
+  const navigate = useNavigate();
+
   const onKakaoLoginClick = () => {
     const CLIENT_ID = `${import.meta.env.VITE_KAKAO_API_KEY}`;
     const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
@@ -8,7 +13,11 @@ const KakaoLogin = () => {
     window.location.href = kakaoURL;
   };
 
-  return <SButton onClick={onKakaoLoginClick}>테스트 만들기</SButton>;
+  const onTestMakeClick = () => {
+    navigate("/survey");
+  };
+
+  return <SButton onClick={loginStatus === null ? onKakaoLoginClick : onTestMakeClick}>테스트 만들기</SButton>;
 };
 
 const SButton = styled.button`

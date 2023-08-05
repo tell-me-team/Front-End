@@ -3,6 +3,10 @@ import { styled } from "styled-components";
 import ServiceIcon from "../components/common/ServiceIcon";
 
 function MainPage() {
+  const onWityClick = () => {
+    window.location.href = "https://www.wity.im/page";
+  };
+
   return (
     <SLayout>
       <SGlassBox>
@@ -25,7 +29,7 @@ function MainPage() {
         <span>테스트 만들기</span>
         <p>타인이 보는 내가 궁금하다면 ?</p>
       </SFrameBox>
-      <SFrameBox>
+      <SFrameBox onClick={onWityClick}>
         <span>위티 프로필 보러가기</span>
         <p>00님을 자세히 알고 싶다면 ?</p>
       </SFrameBox>
@@ -102,6 +106,7 @@ const SButton = styled.button`
   color: #ffffff;
   font-size: 18px;
   margin-top: 8px;
+  cursor: pointer;
 `;
 
 const HighlightText = styled.span`
@@ -124,6 +129,8 @@ const SFrameBox = styled.div`
   background-color: rgba(111, 99, 224, 0.5);
   border-radius: 200px;
   margin-bottom: 24px;
+  cursor: pointer;
+
   > span {
     color: #343434;
     font-size: 17px;
