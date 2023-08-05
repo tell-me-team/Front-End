@@ -1,10 +1,25 @@
 import { styled } from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
 
 import ServiceIcon from "../components/common/ServiceIcon";
 
 function MainPage() {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  // TODO: 아래 값 전역으로 저장할 지 로컬 스토리지에 저장할 지 고민
+  console.log(params.shortUrl);
+
+  const onTestClick = () => {
+    navigate("/survey");
+  };
+
   const onWityClick = () => {
-    window.location.href = "https://www.wity.im/page";
+    window.location.href = "https://www.wity.im/";
+  };
+
+  const onMainMove = () => {
+    navigate("/");
   };
 
   return (
@@ -15,7 +30,7 @@ function MainPage() {
         <SSubTitleSpan>나에 대해 알려줘!</SSubTitleSpan>
         <STestImage />
         <hr />
-        <SButton>테스트 시작하기</SButton>
+        <SButton onClick={onTestClick}>테스트 시작하기</SButton>
       </SGlassBox>
       <SPBox>
         <SCounterP>
@@ -25,7 +40,7 @@ function MainPage() {
           <HighlightText>00님의 설문</HighlightText>에 참여했습니다.
         </SCounterP>
       </SPBox>
-      <SFrameBox>
+      <SFrameBox onClick={onMainMove}>
         <span>테스트 만들기</span>
         <p>타인이 보는 내가 궁금하다면 ?</p>
       </SFrameBox>

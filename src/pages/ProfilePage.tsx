@@ -2,26 +2,40 @@ import { styled } from "styled-components";
 
 import BackIcon from "../components/common/BackIcon";
 import ProfileImage from "../components/common/ProfileImage";
-import profilePuzzle from "../constants/profilePuzzle";
+import { profileCall } from "../api/profileCall";
+import { useEffect, useState } from "react";
 
-interface ProfilePuzzleItemProps {
-  bgIndex: number;
+interface Profile {
+  profileName: string;
+  profileType: string;
+  profileKeyword: string[];
 }
 
 const ProfilePage = () => {
+  const [profile, setProfile] = useState<Profile>({ profileName: "", profileType: "", profileKeyword: [] });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profileData = await profileCall("userId");
+      setProfile(profileData);
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
     <SLayout>
       <BackIcon />
       <SProfile>
         <ProfileImage />
         <div>
-          <span>사용자 이름</span>
-          <span>사용자 테스트 결과 유형</span>
+          <span>{profile.profileName}</span>
+          <span>{profile.profileType}</span>
         </div>
       </SProfile>
       <SPuzzle>
         <ul>
-          {profilePuzzle.map((keyword, index) => (
+          {profile.profileKeyword.map((keyword, index) => (
             <li key={index}>{keyword}</li>
           ))}
         </ul>
@@ -36,8 +50,11 @@ const ProfilePage = () => {
 };
 
 const SLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   padding: 40px 24px;
   background-image: url(/background/background_image_3.svg);
   background-repeat: no-repeat;
@@ -113,12 +130,7 @@ const SBox = styled.div`
   border-radius: 100px;
 
   margin: 32px 0;
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.5) 100%
-    ),
-    rgba(0, 0, 0, 0.1);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%), rgba(0, 0, 0, 0.1);
   box-shadow:
     1px 1.5px 4px 0px rgba(0, 0, 0, 0.1) inset,
     1px 1.5px 4px 0px rgba(0, 0, 0, 0.08) inset,
@@ -140,14 +152,8 @@ const SBox = styled.div`
       border-radius: 100px;
       background: rgba(212, 210, 220, 0.5);
       box-shadow:
-        -1.2666666507720947px 1.2666666507720947px 1.2666666507720947px 0px
-          rgba(255, 255, 255, 0.35) inset,
-        1.2666666507720947px -1.2666666507720947px 1.2666666507720947px 0px rgba(
-            148,
-            144,
-            176,
-            0.35
-          ) inset;
+        -1.2666666507720947px 1.2666666507720947px 1.2666666507720947px 0px rgba(255, 255, 255, 0.35) inset,
+        1.2666666507720947px -1.2666666507720947px 1.2666666507720947px 0px rgba(148, 144, 176, 0.35) inset;
       backdrop-filter: blur(8.613333702087402px);
     }
 
@@ -156,14 +162,8 @@ const SBox = styled.div`
       border-radius: 100px;
       background: rgba(176, 172, 210, 1);
       box-shadow:
-        -1.2666666507720947px 1.2666666507720947px 1.2666666507720947px 0px
-          rgba(255, 255, 255, 0.35) inset,
-        1.2666666507720947px -1.2666666507720947px 1.2666666507720947px 0px rgba(
-            148,
-            144,
-            176,
-            0.35
-          ) inset;
+        -1.2666666507720947px 1.2666666507720947px 1.2666666507720947px 0px rgba(255, 255, 255, 0.35) inset,
+        1.2666666507720947px -1.2666666507720947px 1.2666666507720947px 0px rgba(148, 144, 176, 0.35) inset;
       backdrop-filter: blur(8.613333702087402px);
     }
   }
