@@ -1,18 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { surveyGetApi } from "../../api/surveyApi";
-import glass from "../../assets/glass.svg";
 import { puzzles } from "../../constants/surveyPageUtils";
-import {
-  SProfile,
-  SPuzzle1,
-  SPuzzle2,
-  SPuzzleContainer,
-  SPuzzlesContainer,
-  SType,
-  STypeContainer,
-  STypesContainer,
-  STypesOutContainer,
-} from "./PuzzlePageStyle";
+import { SProfile, SPuzzle1, SPuzzle2, SPuzzleContainer, SPuzzlesContainer, STypeContainer } from "./PuzzlePageStyle";
 
 interface Question {
   id: string;
@@ -23,7 +12,6 @@ interface Question {
 
 const PuzzlePage = () => {
   const [types, setTypes] = useState<Question[]>([]);
-  const [mouseDownClientX, setMouseDownClientX] = useState(0);
   // const [mouseUpClientX, setMouseUpClientX] = useState(0);
   // const [activeIndex, setActiveIndex] = useState(0);
 
@@ -72,10 +60,7 @@ const PuzzlePage = () => {
         <SProfile></SProfile>
         <div style={{ marginTop: "16px" }}>
           <p style={{ width: "207px", fontSize: "22px" }}>
-            <strong style={{ color: "#6F63E0", fontSize: "22px" }}>
-              헤르미온느 유형
-            </strong>
-            을 가진, 사용자님을 소개합니다.
+            <strong style={{ color: "#6F63E0", fontSize: "22px" }}>헤르미온느 유형</strong>을 가진, 사용자님을 소개합니다.
           </p>
         </div>
       </STypeContainer>
@@ -116,14 +101,9 @@ const PuzzlePage = () => {
                 <div>
                   <div className="types">{type.id}</div>
                   {index === 4 ? (
-                    <SPuzzle1
-                      style={{ marginTop: "60px" }}
-                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                    />
+                    <SPuzzle1 style={{ marginTop: "60px" }} dangerouslySetInnerHTML={{ __html: puzzles[index] }} />
                   ) : (
-                    <SPuzzle1
-                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                    />
+                    <SPuzzle1 dangerouslySetInnerHTML={{ __html: puzzles[index] }} />
                   )}
                 </div>
                 <div className="detail" style={{ marginLeft: "200px" }}>
@@ -138,14 +118,9 @@ const PuzzlePage = () => {
                 <div>
                   <div className="types">{type.id}</div>
                   {index === 3 ? (
-                    <SPuzzle2
-                      style={{ marginTop: "60px" }}
-                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                    />
+                    <SPuzzle2 style={{ marginTop: "60px" }} dangerouslySetInnerHTML={{ __html: puzzles[index] }} />
                   ) : (
-                    <SPuzzle2
-                      dangerouslySetInnerHTML={{ __html: puzzles[index] }}
-                    />
+                    <SPuzzle2 dangerouslySetInnerHTML={{ __html: puzzles[index] }} />
                   )}
                 </div>
               </>

@@ -17,7 +17,6 @@ function KakaoLoginPage() {
         })
         .catch((error) => {
           console.error(error);
-          navigate("/error");
         });
     }
   }, [navigate]);
