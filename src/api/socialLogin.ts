@@ -8,10 +8,9 @@ export const socialLogin = async (code: string) => {
         "Content-Type": "application/json",
       },
     });
-    const { accessToken, refreshToken } = response.data;
-    console.log(response);
+    const { accessToken, refreshToken } = response.data.data;
     return { accessToken, refreshToken };
   } catch (error) {
-    throw new Error("Failed to fetch tokens");
+    throw console.error(error);
   }
 };

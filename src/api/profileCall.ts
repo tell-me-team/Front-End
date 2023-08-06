@@ -1,4 +1,5 @@
 export const profileCall = async (userId: string) => {
+  console.log(userId);
   try {
     const profileName = "김위티";
     const profileType = "잭 스패로우";
@@ -6,6 +7,6 @@ export const profileCall = async (userId: string) => {
 
     return { profileName, profileType, profileKeyword };
   } catch (error) {
-    throw new Error("Failed to fetch tokens");
+    throw console.error(error);
   }
 };

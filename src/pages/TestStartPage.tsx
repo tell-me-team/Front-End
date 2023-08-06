@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
 import ServiceIcon from "../components/common/ServiceIcon";
+import { decodeShortUrl } from "../api/decodeShortUrl";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -9,6 +11,10 @@ function MainPage() {
 
   // TODO: 아래 값 전역으로 저장할 지 로컬 스토리지에 저장할 지 고민
   console.log(params.shortUrl);
+
+  useEffect(() => {
+    decodeShortUrl(params.shortUrl);
+  }, []);
 
   const onTestClick = () => {
     navigate("/survey");

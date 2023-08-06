@@ -23,11 +23,9 @@ const ResultPage = () => {
       <SExtraButton style={{ marginTop: "-757px", marginLeft: "310px" }} />
       {result[0] && (
         <SMovieTicket>
-          <div className="title">
-            <h1>{result[0].id}</h1>
-          </div>
+          <div className="title">{/* <h1>{result[0].id}</h1> */}</div>
           <div className="puzzles">퍼즐이미지</div>
-          <div className="typeDetail">{result[0].title}</div>
+          {/* <div className="typeDetail">{result[0].title}</div> */}
 
           <img src={movieTicket} />
           <div className="share">
