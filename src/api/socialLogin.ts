@@ -9,6 +9,7 @@ export const socialLogin = async (code: string) => {
       },
     });
     const { accessToken, refreshToken } = response.data.data;
+    console.log(response.data.data);
     return { accessToken, refreshToken };
   } catch (error) {
     throw console.error(error);

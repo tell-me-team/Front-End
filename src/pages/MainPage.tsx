@@ -9,7 +9,7 @@ const TestStartPage = () => {
     <SLayout>
       <ProfileImage />
       <SGlassBox>
-        <ServiceIcon />
+        <SServiceIcon />
         <STitleSpan>Tell ME</STitleSpan>
         <SSubTitleSpan>
           <b>내가 보는 나</b>와
@@ -36,6 +36,10 @@ const SLayout = styled.div`
   background-image: url(/background/background_image_2.svg);
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+const SServiceIcon = styled(ServiceIcon)`
+  margin-top: 20px;
 `;
 
 const SGlassBox = styled.div`

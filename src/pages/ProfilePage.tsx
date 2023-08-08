@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 import BackIcon from "../components/common/BackIcon";
 import ProfileImage from "../components/common/ProfileImage";
-import { profileCall } from "../api/profileCall";
+import { callProfile } from "../api/callProfile";
 import { useEffect, useState } from "react";
 
 interface Profile {
@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const profileData = await profileCall("userId");
+      const profileData = await callProfile("userId");
       setProfile(profileData);
     };
 

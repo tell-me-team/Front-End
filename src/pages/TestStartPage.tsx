@@ -31,7 +31,7 @@ function MainPage() {
   return (
     <SLayout>
       <SGlassBox>
-        <ServiceIcon />
+        <SServiceIcon />
         <STitleSpan>Tell ME</STitleSpan>
         <SSubTitleSpan>나에 대해 알려줘!</SSubTitleSpan>
         <STestImage />
@@ -68,6 +68,10 @@ const SLayout = styled.div`
   background-image: url(/background/background_image_1.svg);
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+const SServiceIcon = styled(ServiceIcon)`
+  margin-top: 20px;
 `;
 
 const SCounterP = styled.p`
