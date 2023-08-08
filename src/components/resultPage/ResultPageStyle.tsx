@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+
 export const SMovieTicket = styled.div`
   position: absolute;
   margin-top: -30px;
@@ -13,13 +14,29 @@ export const SMovieTicket = styled.div`
     font-size: 40px;
   }
   .puzzles {
+    display: flex;
+    flex-direction: row;
+
     position: absolute;
     margin-top: 200px;
     margin-left: 60px;
+    width: 255px;
+    height: 50px;
+    background-image: url(/result/result_keyword.svg);
+    background-repeat: no-repeat;
+  }
+
+  .puzzlesDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 88px;
+    height: 50px;
   }
   .typeDetail {
     position: absolute;
-    margin: 250px 61px 0 61px;
+    margin: 280px 61px 0 61px;
   }
 
   .share {
