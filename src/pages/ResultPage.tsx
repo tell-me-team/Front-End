@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
-import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
 
 const TestStartPage = () => {
@@ -9,7 +8,6 @@ const TestStartPage = () => {
     <SLayout>
       <ProfileImage />
       <SGlassBox>
-        <ServiceIcon />
         <STitleSpan>Tell ME</STitleSpan>
         <SSubTitleSpan>
           <b>내가 보는 나</b>와
