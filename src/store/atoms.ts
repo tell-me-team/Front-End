@@ -9,3 +9,8 @@ export const userPictureState = atom({
   key: "userPictureState",
   default: "",
 });
+
+export const othersState = atom({
+  key: "othersState",
+  default: true,
+});

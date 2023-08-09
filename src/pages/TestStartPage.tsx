@@ -5,15 +5,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import ServiceIcon from "../components/common/ServiceIcon";
 import { decodeShortUrl } from "../api/decodeShortUrl";
 
+import { useRecoilState } from "recoil";
+import { othersState } from "../store/atoms";
+
 function MainPage() {
   const navigate = useNavigate();
   const params = useParams();
+  const [, setOthers] = useRecoilState(othersState);
 
   // TODO: 아래 값 전역으로 저장할 지 로컬 스토리지에 저장할 지 고민
   console.log(params.shortUrl);
 
   useEffect(() => {
     decodeShortUrl(params.shortUrl);
+    setOthers(true);
   }, []);
 
   const onTestClick = () => {
@@ -52,7 +57,7 @@ function MainPage() {
       </SFrameBox>
       <SFrameBox onClick={onWityClick}>
         <span>위티 프로필 보러가기</span>
-        <p>00님을 자세히 알고 싶다면 ?</p>
+        <p>00님을 자세히 알고 싶 다면 ?</p>
       </SFrameBox>
     </SLayout>
   );

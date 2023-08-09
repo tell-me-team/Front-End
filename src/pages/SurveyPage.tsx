@@ -70,6 +70,10 @@ const SurveyPage = () => {
   };
 
   const handlePreviousQuestion = () => {
+    if (surveyProgress === 1) {
+      navigate("/");
+    }
+
     if (surveyProgress > 1) setSurveyProgress((prev) => prev - 1);
   };
 
@@ -81,7 +85,7 @@ const SurveyPage = () => {
     <SLayout>
       <SGagebarContainer>{surveyProgress}/10</SGagebarContainer>
       <SProgressGageBar>
-        <SProgressGageBarStatus status={surveyProgress} />
+        <SProgressGageBarStatus $status={surveyProgress} />
       </SProgressGageBar>
       <SurveySection onAnswer={handleAnswer} onPreviousQuestion={handlePreviousQuestion} surveyProgress={surveyProgress} question={questions} />
     </SLayout>
@@ -115,11 +119,11 @@ const SProgressGageBar = styled.div`
 `;
 
 interface ProgressProps {
-  status: number;
+  $status: number;
 }
 
 const SProgressGageBarStatus = styled.div<ProgressProps>`
-  width: ${(props) => props.status * 29.5}px;
+  width: ${(props) => props.$status * 29.5}px;
   height: 10px;
   background-color: #6f63e0;
   border-radius: 100px;

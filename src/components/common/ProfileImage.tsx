@@ -8,7 +8,6 @@ const ProfileImage = () => {
   const loginStatus = accessTokenStorage.get();
   const navigate = useNavigate();
   const [userPicture] = useRecoilState(userPictureState);
-  console.log(userPicture);
 
   const onKakaoLoginClick = () => {
     const CLIENT_ID = `${import.meta.env.VITE_KAKAO_API_KEY}`;

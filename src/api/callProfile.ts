@@ -1,5 +1,4 @@
 export const callProfile = async (userId: string) => {
-  console.log(userId);
   try {
     const profileName = "지희";
     const profileType = "잭 스패로우";

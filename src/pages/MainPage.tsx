@@ -1,10 +1,19 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
 import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
 
-const TestStartPage = () => {
+import { useRecoilState } from "recoil";
+import { othersState } from "../store/atoms";
+
+const MainPage = () => {
+  const [, setOthers] = useRecoilState(othersState);
+
+  useEffect(() => {
+    setOthers(false);
+  }, []);
   return (
     <SLayout>
       <ProfileImage />
@@ -87,4 +96,4 @@ const STestImage = styled.div`
   background-size: cover;
 `;
 
-export default TestStartPage;
+export default MainPage;

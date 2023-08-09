@@ -4,6 +4,11 @@ import BackIcon from "../components/common/BackIcon";
 import ProfileImage from "../components/common/ProfileImage";
 import { callProfile } from "../api/callProfile";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { accessTokenStorage, refreshTokenStorage } from "../store/typedStorage";
+import { useRecoilState } from "recoil";
+import { userIdState, userPictureState, othersState } from "../store/atoms";
 
 interface Profile {
   profileName: string;
@@ -12,7 +17,11 @@ interface Profile {
 }
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile>({ profileName: "", profileType: "", profileKeyword: [] });
+  const [others] = useRecoilState(othersState);
+  const [, serUserId] = useRecoilState(userIdState);
+  const [, setUserPictureState] = useRecoilState(userPictureState);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -22,6 +31,18 @@ const ProfilePage = () => {
 
     fetchProfile();
   }, []);
+
+  const onLogOutClick = () => {
+    accessTokenStorage.clear();
+    refreshTokenStorage.clear();
+    serUserId(0);
+    setUserPictureState("");
+    navigate("/");
+  };
+
+  const onTestClick = () => {
+    navigate("/survey");
+  };
 
   return (
     <SLayout>
@@ -40,11 +61,17 @@ const ProfilePage = () => {
           ))}
         </ul>
       </SPuzzle>
-      <SBox>
-        <div>테스트 만들기</div>
-        <div>통계 상세 보기</div>
-      </SBox>
-      <SLogout>로그아웃</SLogout>
+      {others ? (
+        ""
+      ) : (
+        <>
+          <SBox>
+            <div onClick={onTestClick}>테스트 만들기</div>
+            <div>통계 상세 보기</div>
+          </SBox>
+          <SLogout onClick={onLogOutClick}>로그아웃</SLogout>
+        </>
+      )}
     </SLayout>
   );
 };
@@ -146,6 +173,7 @@ const SBox = styled.div`
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -1px;
+    cursor: pointer;
 
     &:first-child {
       color: #6f63e0;
@@ -175,6 +203,7 @@ const SLogout = styled.p`
   font-weight: 500;
   line-height: 20px;
   text-align: center;
+  cursor: pointer;
 `;
 
 export default ProfilePage;
