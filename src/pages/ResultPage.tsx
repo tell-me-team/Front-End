@@ -26,6 +26,10 @@ const TestStartPage = () => {
     navigate("/");
   };
 
+  const onProfileMove = () => {
+    navigate("/profile");
+  };
+
   return (
     <SLayout>
       <ProfileImage />
@@ -49,7 +53,7 @@ const TestStartPage = () => {
               <span>테스트 만들기</span>
               <span>타인이 보는 내가 궁금하다면?</span>
             </STestButton>
-            <SBox>
+            <SBox onClick={onProfileMove}>
               <div>만든 사람 프로필 보기</div>
             </SBox>
           </>

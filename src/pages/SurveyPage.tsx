@@ -47,18 +47,15 @@ const SurveyPage = () => {
           })),
         };
 
-        console.log(userId);
-        console.log(transformedAnswers);
+        // postAnswer(1, userId, transformedAnswers)
+        //   .then((response) => {
+        //     console.log(response);
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error posting the answer:", error);
+        //   });
 
-        postAnswer(1, userId, transformedAnswers)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("Error posting the answer:", error);
-          });
-
-        // navigate("/result");
+        navigate("/result");
       }
 
       return updatedAnswers;

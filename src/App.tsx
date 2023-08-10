@@ -8,9 +8,9 @@ import MainPage from "./pages/MainPage";
 import SurveyPage from "./pages/SurveyPage";
 import KakaoLoginPage from "./pages/KakaoLoginPage";
 import ResultPage from "./pages/ResultPage";
-import PuzzlesPage from "./components/puzzlePage/PuzzlesPage";
 import TestStartPage from "./pages/TestStartPage";
 import ProfilePage from "./pages/ProfilePage";
+import StatisticsPage from "./pages/StatisticsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,7 +22,7 @@ function App() {
         { path: "/", element: <MainPage /> },
         { path: "/survey", element: <SurveyPage /> },
         { path: "/auth/kakao", element: <KakaoLoginPage /> },
-        { path: "/puzzle", element: <PuzzlesPage /> },
+        { path: "/statistics", element: <StatisticsPage /> },
         { path: "/result", element: <ResultPage /> },
         { path: "/:shortUrl", element: <TestStartPage /> },
         { path: "/profile", element: <ProfilePage /> },
