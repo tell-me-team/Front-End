@@ -20,8 +20,8 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile>({ profileName: "", profileType: "", profileKeyword: [] });
   const [others] = useRecoilState(othersState);
-  const [, serUserId] = useRecoilState(userIdState);
-  const [, setUserPictureState] = useRecoilState(userPictureState);
+  const [, setUserId] = useRecoilState(userIdState);
+  const [, setUserPicture] = useRecoilState(userPictureState);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -35,13 +35,17 @@ const ProfilePage = () => {
   const onLogOutClick = () => {
     accessTokenStorage.clear();
     refreshTokenStorage.clear();
-    serUserId(0);
-    setUserPictureState("");
+    setUserId(0);
+    setUserPicture("");
     navigate("/");
   };
 
   const onTestClick = () => {
     navigate("/survey");
+  };
+
+  const onStatisticsMove = () => {
+    navigate("/statistics");
   };
 
   return (
@@ -67,7 +71,7 @@ const ProfilePage = () => {
         <>
           <SBox>
             <div onClick={onTestClick}>테스트 만들기</div>
-            <div>통계 상세 보기</div>
+            <div onClick={onStatisticsMove}>통계 상세 보기</div>
           </SBox>
           <SLogout onClick={onLogOutClick}>로그아웃</SLogout>
         </>

@@ -4,16 +4,32 @@ import { styled } from "styled-components";
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
 import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
+import { callUser } from "../api/callUser";
 
 import { useRecoilState } from "recoil";
-import { othersState } from "../store/atoms";
+import { userIdState, userPictureState, othersState } from "../store/atoms";
+import { accessTokenStorage } from "../store/typedStorage";
 
 const MainPage = () => {
   const [, setOthers] = useRecoilState(othersState);
+  const [userId, setUserId] = useRecoilState(userIdState);
+  const [userPicture, setUserPicture] = useRecoilState(userPictureState);
+  const loginStatus = accessTokenStorage.get();
 
   useEffect(() => {
     setOthers(false);
+    if (loginStatus !== null) {
+      callUser()
+        .then((data) => {
+          setUserId(data.userId);
+          setUserPicture(data.profileImage);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
   }, []);
+
   return (
     <SLayout>
       <ProfileImage />

@@ -20,17 +20,17 @@ const ProfileImage = () => {
     navigate("/profile");
   };
 
-  return <SProfileImage onClick={loginStatus === null ? onKakaoLoginClick : onProfileClick} imageUrl={userPicture || undefined} />;
+  return <SProfileImage onClick={loginStatus === null ? onKakaoLoginClick : onProfileClick} $imageUrl={userPicture || undefined} />;
 };
 
 interface SProfileImageProps {
-  imageUrl?: string;
+  $imageUrl?: string;
 }
 
 const SProfileImage = styled.div<SProfileImageProps>`
   width: 44px;
   height: 44px;
-  background: ${(props) => (props.imageUrl ? `url(${props.imageUrl}) center / cover` : "#6f63e0")};
+  background: ${(props) => (props.$imageUrl ? `url(${props.$imageUrl}) center / cover` : "#6f63e0")};
   border-radius: 50%;
   cursor: pointer;
 `;

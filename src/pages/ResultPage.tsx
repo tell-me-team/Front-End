@@ -1,17 +1,27 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { othersState } from "../store/atoms";
+import { userIdState, othersState } from "../store/atoms";
 
+import { callResult } from "../api/callResult";
 import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
 
 const TestStartPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [others] = useRecoilState(othersState);
+  const [userId] = useRecoilState(userIdState);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profileData = await callResult(userId, 1);
+    };
+
+    fetchProfile();
+  }, []);
 
   const onButtonClick = () => {
     if (buttonRef.current) {
@@ -85,14 +95,15 @@ const SResultBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 800px;
-  background-image: url(/result/result_ticket.svg);
+  height: 750px;
+  background-image: url(/result/result_background.svg);
   padding: 0 24px;
+  margin-top: 40px;
 
   > h2 {
     color: white;
     font-size: 40px;
-    margin-top: 100px;
+    margin-top: 80px;
   }
 
   > p {

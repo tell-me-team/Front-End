@@ -38,6 +38,9 @@ const SurveyPage = () => {
       const updatedAnswers = [...prev];
       updatedAnswers[surveyProgress - 1] = choice;
 
+      if (surveyProgress < 10) {
+        setSurveyProgress((prev) => prev + 1);
+      }
       // 10번째 질문에 대한 답변이 업데이트된 후 실행됩니다.
       if (surveyProgress === 10) {
         const transformedAnswers = {
@@ -47,23 +50,12 @@ const SurveyPage = () => {
           })),
         };
 
-        // postAnswer(1, userId, transformedAnswers)
-        //   .then((response) => {
-        //     console.log(response);
-        //   })
-        //   .catch((error) => {
-        //     console.error("Error posting the answer:", error);
-        //   });
-
+        postAnswer(1, userId, transformedAnswers);
         navigate("/result");
       }
 
       return updatedAnswers;
     });
-
-    if (surveyProgress < 10) {
-      setSurveyProgress((prev) => prev + 1);
-    }
   };
 
   const handlePreviousQuestion = () => {
