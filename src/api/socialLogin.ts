@@ -8,8 +8,8 @@ export const socialLogin = async (code: string) => {
         "Content-Type": "application/json",
       },
     });
-    const { accessToken, refreshToken } = response.data.data;
-    return { accessToken, refreshToken };
+    const { accessToken, refreshToken, userId, userPicture } = response.data.data;
+    return { accessToken, refreshToken, userId, userPicture };
   } catch (error) {
     throw console.error(error);
   }

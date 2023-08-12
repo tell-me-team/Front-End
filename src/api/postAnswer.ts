@@ -1,4 +1,3 @@
-// surveyApi.js
 import axios from "axios";
 
 export const postAnswer = async (surveyId: number, userId: number, answers: any) => {

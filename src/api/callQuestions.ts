@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const questionsCall = async (surveyId: number) => {
+export const callQuestions = async (surveyId: number) => {
   const BackendURL = `${import.meta.env.VITE_BACKEND_URL}/v1/survey/questions/${surveyId}`;
   try {
     const response = await axios.get(BackendURL, {

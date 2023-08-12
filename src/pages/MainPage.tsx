@@ -1,10 +1,35 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
 import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
+import { callUser } from "../api/callUser";
 
-const TestStartPage = () => {
+import { useRecoilState } from "recoil";
+import { userIdState, userPictureState, othersState } from "../store/atoms";
+import { accessTokenStorage } from "../store/typedStorage";
+
+const MainPage = () => {
+  const [, setOthers] = useRecoilState(othersState);
+  const [userId, setUserId] = useRecoilState(userIdState);
+  const [userPicture, setUserPicture] = useRecoilState(userPictureState);
+  const loginStatus = accessTokenStorage.get();
+
+  useEffect(() => {
+    setOthers(false);
+    if (loginStatus !== null) {
+      callUser()
+        .then((data) => {
+          setUserId(data.userId);
+          setUserPicture(data.profileImage);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
+  }, []);
+
   return (
     <SLayout>
       <ProfileImage />
@@ -39,7 +64,6 @@ const SLayout = styled.div`
 `;
 
 const SGlassBox = styled.div`
-  height: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +71,7 @@ const SGlassBox = styled.div`
   background-blend-mode: luminosity;
   backdrop-filter: blur(50px);
   border-radius: 32px;
-  padding: 0 24px;
+  padding: 20px 24px;
   margin-top: 40px;
 
   > hr {
@@ -88,4 +112,4 @@ const STestImage = styled.div`
   background-size: cover;
 `;
 
-export default TestStartPage;
+export default MainPage;

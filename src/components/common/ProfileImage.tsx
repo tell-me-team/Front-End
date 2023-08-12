@@ -1,10 +1,13 @@
 import { styled } from "styled-components";
 import { accessTokenStorage } from "../../store/typedStorage";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userPictureState } from "../../store/atoms";
 
 const ProfileImage = () => {
   const loginStatus = accessTokenStorage.get();
   const navigate = useNavigate();
+  const [userPicture] = useRecoilState(userPictureState);
 
   const onKakaoLoginClick = () => {
     const CLIENT_ID = `${import.meta.env.VITE_KAKAO_API_KEY}`;
@@ -17,14 +20,17 @@ const ProfileImage = () => {
     navigate("/profile");
   };
 
-  return <SProfileImage onClick={loginStatus === null ? onKakaoLoginClick : onProfileClick} />;
+  return <SProfileImage onClick={loginStatus === null ? onKakaoLoginClick : onProfileClick} $imageUrl={userPicture || undefined} />;
 };
 
-const SProfileImage = styled.div`
+interface SProfileImageProps {
+  $imageUrl?: string;
+}
+
+const SProfileImage = styled.div<SProfileImageProps>`
   width: 44px;
   height: 44px;
-  background-color: #6f63e0;
-  opacity: 0.2;
+  background: ${(props) => (props.$imageUrl ? `url(${props.$imageUrl}) center / cover` : "#6f63e0")};
   border-radius: 50%;
   cursor: pointer;
 `;
