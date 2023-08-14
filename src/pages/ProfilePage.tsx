@@ -30,6 +30,9 @@ const ProfilePage = () => {
 
     apiCall(userId, 1)
       .then((response) => {
+        if (response?.data.data.feedBackKeywords === null) {
+          navigate("profileError");
+        }
         const profile = response?.data.data;
 
         const combinedKeywords = [];

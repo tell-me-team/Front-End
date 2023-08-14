@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrPage from "./pages/ErrPage";
+import ErrPage from "./pages/ProfileErrorPage";
 import GlobalStyle from "./global";
 import { RecoilRoot } from "recoil";
 
@@ -11,6 +11,7 @@ import ResultPage from "./pages/ResultPage";
 import TestStartPage from "./pages/TestStartPage";
 import ProfilePage from "./pages/ProfilePage";
 import StatisticsPage from "./pages/StatisticsPage";
+import ProfileErrorPage from "./pages/ProfileErrorPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,7 @@ function App() {
         { path: "/result", element: <ResultPage /> },
         { path: "/:shortUrl", element: <TestStartPage /> },
         { path: "/profile", element: <ProfilePage /> },
+        { path: "/profileError", element: <ProfileErrorPage /> },
       ],
     },
   ]);

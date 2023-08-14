@@ -28,8 +28,6 @@ const StatisticsPage = () => {
       });
   }, []);
 
-  console.log(profile);
-
   return (
     <SLayout>
       <BackIcon />

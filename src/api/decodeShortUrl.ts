@@ -8,8 +8,8 @@ export const decodeShortUrl = async (shortUrl: string | undefined) => {
         "Content-Type": "application/json",
       },
     });
-    const { userId, surveyId, userCount } = response.data.data;
-    return { userId, surveyId, userCount };
+    const { userId, surveyId, userCount, nickname } = response.data.data;
+    return { userId, surveyId, userCount, nickname };
   } catch (error) {
     console.error(error);
   }

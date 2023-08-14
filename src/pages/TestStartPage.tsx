@@ -8,9 +8,10 @@ import { decodeShortUrl } from "../api/decodeShortUrl";
 import { useRecoilState } from "recoil";
 import { userIdState, othersState } from "../store/atoms";
 
-function MainPage() {
+function TestStartPage() {
   const navigate = useNavigate();
   const params = useParams();
+  const [userName, setUserName] = useState("");
   const [userCount, setUserCount] = useState(0);
   const [, setOthers] = useRecoilState(othersState);
   const [, setUserIdState] = useRecoilState(userIdState);
@@ -20,6 +21,7 @@ function MainPage() {
       .then((response) => {
         setUserIdState(response?.userId);
         setUserCount(response?.userCount);
+        setUserName(response?.nickname);
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +56,7 @@ function MainPage() {
           지금까지 <HighlightText>{userCount}명이</HighlightText>
         </SCounterP>
         <SCounterP>
-          <HighlightText>00님의 설문</HighlightText>에 참여했습니다.
+          <HighlightText>{userName}님의 설문</HighlightText>에 참여했습니다.
         </SCounterP>
       </SPBox>
       <SFrameBox onClick={onMainMove}>
@@ -63,7 +65,7 @@ function MainPage() {
       </SFrameBox>
       <SFrameBox onClick={onWityClick}>
         <span>위티 프로필 보러가기</span>
-        <p>00님을 자세히 알고 싶 다면 ?</p>
+        <p>{userName}님을 자세히 알고 싶다면 ?</p>
       </SFrameBox>
     </SLayout>
   );
@@ -182,4 +184,4 @@ const SFrameBox = styled.div`
   }
 `;
 
-export default MainPage;
+export default TestStartPage;
