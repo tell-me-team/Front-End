@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -6,18 +6,24 @@ import ServiceIcon from "../components/common/ServiceIcon";
 import { decodeShortUrl } from "../api/decodeShortUrl";
 
 import { useRecoilState } from "recoil";
-import { othersState } from "../store/atoms";
+import { userIdState, othersState } from "../store/atoms";
 
 function MainPage() {
   const navigate = useNavigate();
   const params = useParams();
+  const [userCount, setUserCount] = useState(0);
   const [, setOthers] = useRecoilState(othersState);
-
-  // TODO: 아래 값 전역으로 저장할 지 로컬 스토리지에 저장할 지 고민
-  console.log(params.shortUrl);
+  const [, setUserIdState] = useRecoilState(userIdState);
 
   useEffect(() => {
-    decodeShortUrl(params.shortUrl);
+    decodeShortUrl(params.shortUrl)
+      .then((response) => {
+        setUserIdState(response?.userId);
+        setUserCount(response?.userCount);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     setOthers(true);
   }, []);
 
@@ -45,7 +51,7 @@ function MainPage() {
       </SGlassBox>
       <SPBox>
         <SCounterP>
-          지금까지 <HighlightText>30명이</HighlightText>
+          지금까지 <HighlightText>{userCount}명이</HighlightText>
         </SCounterP>
         <SCounterP>
           <HighlightText>00님의 설문</HighlightText>에 참여했습니다.

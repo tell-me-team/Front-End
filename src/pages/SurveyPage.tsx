@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { callQuestions } from "../api/callQuestions";
 import { postAnswer } from "../api/postAnswer";
+import { postAnswerMyself } from "../api/postAnswerMyself";
 
 import { useRecoilState } from "recoil";
-import { userIdState } from "../store/atoms";
+import { userIdState, othersState } from "../store/atoms";
 
 import SurveySection from "../components/surveyPage/SurveySection";
 import Loading from "../components/common/Loading";
@@ -15,6 +16,7 @@ const SurveyPage = () => {
   const navigate = useNavigate();
 
   const [userId] = useRecoilState(userIdState);
+  const [others] = useRecoilState(othersState);
 
   const [surveyProgress, setSurveyProgress] = useState(1);
   const [questions, setQuestions] = useState<string[][]>([]);
@@ -41,7 +43,7 @@ const SurveyPage = () => {
       if (surveyProgress < 10) {
         setSurveyProgress((prev) => prev + 1);
       }
-      // 10번째 질문에 대한 답변이 업데이트된 후 실행됩니다.
+
       if (surveyProgress === 10) {
         const transformedAnswers = {
           answerContentList: updatedAnswers.map((answer, index) => ({
@@ -50,8 +52,16 @@ const SurveyPage = () => {
           })),
         };
 
-        postAnswer(1, userId, transformedAnswers);
-        navigate("/result");
+        const apiCall = others ? postAnswer : postAnswerMyself;
+
+        apiCall(1, userId, transformedAnswers)
+          .then((response) => {
+            const result = response.data.data;
+            navigate("/result", { state: { result } });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
 
       return updatedAnswers;

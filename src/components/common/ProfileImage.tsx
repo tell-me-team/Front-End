@@ -20,6 +20,10 @@ const ProfileImage = () => {
     navigate("/profile");
   };
 
+  if (loginStatus === null) {
+    return null;
+  }
+
   return <SProfileImage onClick={loginStatus === null ? onKakaoLoginClick : onProfileClick} $imageUrl={userPicture || undefined} />;
 };
 
