@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 import KakaoLoginButton from "../components/mainPage/KakaoLoginButton";
@@ -11,9 +11,10 @@ import { userIdState, userPictureState, othersState } from "../store/atoms";
 import { accessTokenStorage } from "../store/typedStorage";
 
 const MainPage = () => {
+  const [surveyComplete, setSurveyComplete] = useState(true);
   const [, setOthers] = useRecoilState(othersState);
-  const [userId, setUserId] = useRecoilState(userIdState);
-  const [userPicture, setUserPicture] = useRecoilState(userPictureState);
+  const [, setUserId] = useRecoilState(userIdState);
+  const [, setUserPicture] = useRecoilState(userPictureState);
   const loginStatus = accessTokenStorage.get();
 
   useEffect(() => {
@@ -23,6 +24,9 @@ const MainPage = () => {
         .then((data) => {
           setUserId(data.userId);
           setUserPicture(data.profileImage);
+          if (data.myCompleteSurveyList.length === 0) {
+            setSurveyComplete(false);
+          }
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -32,7 +36,7 @@ const MainPage = () => {
 
   return (
     <SLayout>
-      <ProfileImage />
+      {surveyComplete ? <ProfileImage /> : null}
       <SGlassBox>
         <ServiceIcon />
         <STitleSpan>Tell ME</STitleSpan>

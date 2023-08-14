@@ -2,7 +2,8 @@ import { styled } from "styled-components";
 
 import BackIcon from "../components/common/BackIcon";
 import ProfileImage from "../components/common/ProfileImage";
-import { callProfile } from "../api/callProfile";
+import { callResult } from "../api/callResult";
+import { callResultMyself } from "../api/callResultMyself";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,25 +12,46 @@ import { useRecoilState } from "recoil";
 import { userIdState, userPictureState, othersState } from "../store/atoms";
 
 interface Profile {
-  profileName: string;
-  profileType: string;
-  profileKeyword: string[];
+  nickname: string;
+  selfKeywords: { title: string }[];
+  feedBackKeywords: { title: string }[];
+  combinedKeywords: string[];
+  type: string;
 }
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<Profile>({ profileName: "", profileType: "", profileKeyword: [] });
+  const [profile, setProfile] = useState<Profile>({ nickname: "", selfKeywords: [], feedBackKeywords: [], type: "", combinedKeywords: [] });
   const [others] = useRecoilState(othersState);
-  const [, setUserId] = useRecoilState(userIdState);
+  const [userId, setUserId] = useRecoilState(userIdState);
   const [, setUserPicture] = useRecoilState(userPictureState);
-
   useEffect(() => {
-    const fetchProfile = async () => {
-      const profileData = await callProfile("userId");
-      setProfile(profileData);
-    };
+    const apiCall = others ? callResult : callResultMyself;
 
-    fetchProfile();
+    apiCall(userId, 1)
+      .then((response) => {
+        const profile = response?.data.data;
+
+        const combinedKeywords = [];
+
+        for (let i = 0; i < 3; i++) {
+          if (profile.selfKeywords[i]) {
+            combinedKeywords.push(profile.selfKeywords[i].title);
+          }
+          if (profile.feedBackKeywords[i]) {
+            combinedKeywords.push(profile.feedBackKeywords[i].title);
+          }
+        }
+        const newProfile = {
+          ...profile,
+          combinedKeywords,
+        };
+
+        setProfile(newProfile);
+      })
+      .catch((error) => {
+        console.error("Error posting answer:", error);
+      });
   }, []);
 
   const onLogOutClick = () => {
@@ -54,16 +76,12 @@ const ProfilePage = () => {
       <SProfile>
         <ProfileImage />
         <div>
-          <span>{profile.profileName}</span>
-          <span>{profile.profileType}</span>
+          <span>{profile.nickname}</span>
+          <span>{profile.type}</span>
         </div>
       </SProfile>
       <SPuzzle>
-        <ul>
-          {profile.profileKeyword.map((keyword, index) => (
-            <li key={index}>{keyword}</li>
-          ))}
-        </ul>
+        <ul>{profile.combinedKeywords?.map((keyword, index) => <li key={index}>{keyword}</li>)}</ul>
       </SPuzzle>
       {others ? (
         ""

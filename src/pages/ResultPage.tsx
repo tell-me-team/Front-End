@@ -1,27 +1,19 @@
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { userIdState, othersState } from "../store/atoms";
+import { othersState } from "../store/atoms";
 
-import { callResult } from "../api/callResult";
 import ServiceIcon from "../components/common/ServiceIcon";
 import ProfileImage from "../components/common/ProfileImage";
 
 const TestStartPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [others] = useRecoilState(othersState);
-  const [userId] = useRecoilState(userIdState);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const profileData = await callResult(userId, 1);
-    };
-
-    fetchProfile();
-  }, []);
+  const location = useLocation();
+  const resultInfo = { ...location.state.result };
 
   const onButtonClick = () => {
     if (buttonRef.current) {
@@ -44,17 +36,13 @@ const TestStartPage = () => {
     <SLayout>
       <ProfileImage />
       <SResultBox>
-        <h2>잭 스페로우</h2>
+        <h2>{resultInfo.type}</h2>
         <SKeywordBox>
-          <span>모험심</span>
-          <span>자유로움</span>
-          <span>반항적</span>
+          {resultInfo.keywordInfo.map((keyword: { title: string }, index: number) => (
+            <span key={index}>{keyword.title}</span>
+          ))}
         </SKeywordBox>
-        <p>
-          잭 스패로우는 독특한 성격을 지닌 자유로운 영혼의 캐릭터에요. 자신의 규칙에 따라 살고자 하며, 권위와 규칙에 대한 반항적이에요. 전통적인 규칙과 기존의
-          질서를 거부하고, 자신만의 방식으로 사는 것을 선호하죠. 불가사의한 상황에서도 유머와 센스로 주변 사람들과 우호적인 관계를 형성하며, 신뢰를 쌓는
-          독특하고 마력적인 캐릭터에요.
-        </p>
+        <p>{resultInfo.content}</p>
 
         {others ? (
           <>
@@ -72,7 +60,7 @@ const TestStartPage = () => {
             <span>'나를 어떻게 보고 있을까' 궁금한 사람에게</span>
             <h3>테스트 공유하기</h3>
             <SButton ref={buttonRef} onClick={onButtonClick}>
-              https://tell-me.store/WQs==
+              {`https://tell-me.store/${resultInfo.shortUrl}`}
             </SButton>
           </>
         )}

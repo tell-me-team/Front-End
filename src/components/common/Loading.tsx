@@ -1,7 +1,11 @@
 import styled, { keyframes } from "styled-components";
 
 const Loading = () => {
-  return <StyledSpinner />;
+  return (
+    <SLayout>
+      <StyledSpinner />
+    </SLayout>
+  );
 };
 
 const spin = keyframes`
@@ -9,9 +13,16 @@ const spin = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
+const SLayout = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 const StyledSpinner = styled.div`
-  border: 16px solid #f3f3f3; // Light grey
-  border-top: 16px solid #3498db; // Blue
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
   border-radius: 50%;
   width: 120px;
   height: 120px;
